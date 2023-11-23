@@ -61,8 +61,6 @@ output:
 ```
 
 
-{ "phrases": [ { "id": "uuid", "phrase": "This is a text", "meaning": "Este es un texto" } ] }
-
 ```bash
 $ curl -X POST -H "Content-Type: application/json" -d '{ "phrases": [ { "id": "uuid", "phrase": "This is a text" } ] }' "http://localhost:5001/translate" 
 ```
