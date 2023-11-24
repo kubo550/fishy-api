@@ -26,11 +26,19 @@ const translate: FastifyPluginAsync = async (fastify, opts): Promise<void> => {
             }
         }
     }, async function (request, reply) {
-        const {phrases} = request.body as { phrases: Phrase[] }
-        const translated = gpt.prompt(GptApiPrompts.translatePhrases(), JSON.stringify(phrases))
-        return {
-            phrases: translated
+        try {
+            const {phrases} = request.body as { phrases: Phrase[] }
+            const translated = gpt.prompt(GptApiPrompts.translatePhrases(), JSON.stringify(phrases))
+            return {
+                phrases: translated
+            }
+        } catch (e) {
+            reply.code(500)
+            return {
+                error: 'Something went wrong, please try again later'
+            }
         }
+
     })
 }
 
